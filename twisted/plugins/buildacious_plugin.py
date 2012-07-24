@@ -23,7 +23,7 @@ class Buildacious(resource.Resource):
 
     def endJob(self, res, job):
         out, err, signalNum = res
-        if signum > 0:
+        if signalNum > 0:
             print "Job died:", job
             os.remove(os.path.join('/var/www/buildacious/uploads', job))
             del self.currentWorkers[job]

@@ -22,11 +22,19 @@ class Buildacious(resource.Resource):
         self.task.start(5.0)
 
     def endJob(self, res, job):
-        print job, res
         out, err, signalNum = res
-        print "Job end", out
-        os.remove(os.path.join('/var/www/buildacious/uploads', job))
-        del self.currentWorkers[job]
+        if signum > 0:
+            print "Job died:", job
+            os.remove(os.path.join('/var/www/buildacious/uploads', job))
+            del self.currentWorkers[job]
+        else:
+            print "Job end:",job, out
+            os.remove(os.path.join('/var/www/buildacious/uploads', job))
+            del self.currentWorkers[job]
+
+            f = open('/var/www/buildacious/completed', 'at')
+            f.write(job+'\n')
+            f.close()
 
     def coreLoop(self):
         tasks = os.listdir('/var/www/buildacious/uploads')

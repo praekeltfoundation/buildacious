@@ -54,6 +54,11 @@ def index(request):
         n = "%s_%s_source.changes" % (i.binary_package_name, i.binary_package_version)
         ppastat[n] = i.status
 
+    try:
+        uploaded = open('/var/www/buildacious/completed').read()
+    except:
+        uploaded = ""
+
     # Find sources
     for j in jobs:
         sources = [ i for i in 
@@ -75,6 +80,9 @@ def index(request):
                 upload = os.path.exists('/var/www/buildacious/uploads/'+s)
                 if upload:
                     info['uploading'] = True
+
+                if s in uploaded:
+                    info['sent'] = True
 
                 info['status'] = status
 

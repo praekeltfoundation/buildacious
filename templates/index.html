@@ -29,7 +29,12 @@
                             <td>{{build.lpstatus}}</td>
                             <td>+</td>
                         {% else %}
-                            <td>Not published</td>
+                            {% if build.sent %}
+                                <td>Pending</td>
+                            {% else %}
+                                <td>Not published</td>
+                            {% endif %}
+
                             {% if build.status == "SUCCESS" %}
                                 {% if build.uploading %}
                                 <td>Uploading...</td>

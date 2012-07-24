@@ -1,0 +1,33 @@
+body {
+        margin: 0; padding: 0;
+        font: 12px normal Arial, Helvetica, sans-serif;
+}
+
+#header {
+    margin-right: 1em;
+    margin-left: 1em;
+    margin-top: 1em;
+    height: 100px;
+    border-bottom: 1px solid black;
+    background: url('/static/logo_pf.png') no-repeat;
+}
+
+h2{
+    border-bottom: 1px solid gray;
+    display:inline-block
+}
+
+td {
+    padding-left: 0; 
+    padding-right: 2em;
+}
+
+table {
+    border: 1px solid black;
+}
+
+#content {
+    margin-left: 2em;
+
+}
+

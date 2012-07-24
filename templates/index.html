@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Buildacious!</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />    
+</head>
+
+<body>
+    <div id="header">
+    </div>
+
+    <div id="content">
+        {% for job, jdata in stree.items %}
+            <h2>{{job}}</h2>
+            <table>
+                <tr>
+                    <td><strong>Build Version</strong></td>
+                    <td><strong>Distribution</strong></td>
+                    <td><strong>Build State</strong></td>
+                    <td><strong>PPA Publish State</strong></td>
+                    <td></td>
+                </tr>
+                {% for build in jdata %}
+                    <tr>
+                        <td>{{build.version}}</td>
+                        <td>{{build.dist}}</td>
+                        <td>{{build.status}}</td>
+                        {% if build.lpstatus %}
+                            <td>{{build.lpstatus}}</td>
+                            <td>+</td>
+                        {% else %}
+                            <td>Not published</td>
+                            {% if build.status == "SUCCESS" %}
+                                {% if build.uploading %}
+                                <td>Uploading...</td>
+                                {% else %}
+                                <td><a href="/upload/{{build.spath}}/{{build.scfile}}">Upload</a></td>
+                                {% endif %}
+                            {% else %}
+                                <td>_</td>
+                            {% endif %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+
+        {% endfor %}
+    </div>
+</body>
+</html>
+
